@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Problem Solving Interaktif</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: white;
+    line-height: 1.6;
+}
+
+header {
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(135deg,#1e3a8a,#0f172a);
+}
+
+header h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #cbd5e1;
+}
+
+.container {
+    max-width: 950px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.card h2 {
+    color: #38bdf8;
+    margin-bottom: 15px;
+}
+
+/* TAB */
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tab-btn {
+    border: none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: #0f172a;
+    color: white;
+    cursor: pointer;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+    background: #38bdf8;
+    color: #082f49;
+}
+
+.tab-content {
+    margin-top: 20px;
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* LANGKAH */
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+    gap: 15px;
+}
+
+.step {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.step:hover {
+    transform: translateY(-3px);
+    border-color: #38bdf8;
+}
+
+.step-number {
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    background: #38bdf8;
+    color: #082f49;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.step-detail {
+    display: none;
+    margin-top: 12px;
+    color: #cbd5e1;
+}
+
+.step.open .step-detail {
+    display: block;
+}
+
+/* SIMULASI */
+.simulation {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.progress {
+    width: 100%;
+    height: 10px;
+    background: #334155;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 20%;
+    background: #38bdf8;
+    transition: 0.4s;
+}
+
+.sim-btn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    background: #38bdf8;
+    color: #082f49;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* QUIZ */
+.question {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.question h3 {
+    margin-bottom: 15px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 13px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #1e293b;
+    color: white;
+    cursor: pointer;
+}
+
+.option:hover {
+    border-color: #38bdf8;
+}
+
+.option.correct {
+    background: #166534;
+    border-color: #22c55e;
+}
+
+.option.wrong {
+    background: #991b1b;
+    border-color: #ef4444;
+}
+
+.result {
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(135deg,#075985,#1e3a8a);
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.restart {
+    margin-top: 15px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: white;
+    color: #0f172a;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #94a3b8;
+}
+
+@media(max-width:600px) {
+    header h1 {
+        font-size: 32px;
+    }
+
+    .container {
+        padding: 20px 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🧠 Problem Solving</h1>
+    <p>Belajar berpikir logis untuk menemukan solusi</p>
+</header>
+
+<div class="container">
+
+<!-- PENGERTIAN -->
+<section class="card">
+
+<h2>📖 Mengenal Problem Solving</h2>
+
+<div class="tabs">
+
+<button class="tab-btn active" onclick="showTab('pengertian',this)">
+Pengertian
+</button>
+
+<button class="tab-btn" onclick="showTab('tujuan',this)">
+Tujuan
+</button>
+
+<button class="tab-btn" onclick="showTab('manfaat',this)">
+Manfaat
+</button>
+
+</div>
+
+<div id="tabContent" class="tab-content">
+<b>Problem solving</b> adalah proses mencari solusi untuk menyelesaikan suatu masalah secara teratur, logis, dan efektif.
+</div>
+
+</section>
+
+
+<!-- LANGKAH -->
+<section class="card">
+
+<h2>⚙️ 5 Langkah Problem Solving</h2>
+
+<div class="steps">
+
+<div class="step" onclick="toggleStep(this)">
+<span class="step-number">1</span>
+<h3>Identifikasi Masalah</h3>
+
+<div class="step-detail">
+Tentukan masalah yang sedang terjadi dengan jelas.
+<br><br>
+<b>Contoh:</b> Nilai matematika menurun.
+</div>
+
+</div>
+
+
+<div class="step" onclick="toggleStep(this)">
+<span class="step-number">2</span>
+<h3>Cari Penyebab</h3>
+
+<div class="step-detail">
+Cari tahu apa yang menyebabkan masalah tersebut.
+<br><br>
+<b>Contoh:</b> Jarang belajar dan kurang latihan.
+</div>
+
+</div>
+
+
+<div class="step" onclick="toggleStep(this)">
+<span class="step-number">3</span>
+<h3>Cari Solusi</h3>
+
+<div class="step-detail">
+Pikirkan beberapa cara yang dapat digunakan untuk menyelesaikan masalah.
+<br><br>
+<b>Contoh:</b> Belajar rutin dan latihan soal.
+</div>
+
+</div>
+
+
+<div class="step" onclick="toggleStep(this)">
+<span class="step-number">4</span>
+<h3>Terapkan Solusi</h3>
+
+<div class="step-detail">
+Lakukan solusi yang sudah dipilih.
+<br><br>
+<b>Contoh:</b> Belajar 30 menit setiap hari.
+</div>
+
+</div>
+
+
+<div class="step" onclick="toggleStep(this)">
+<span class="step-number">5</span>
+<h3>Evaluasi</h3>
+
+<div class="step-detail">
+Periksa apakah solusi tersebut berhasil.
+<br><br>
+<b>Contoh:</b> Bandingkan nilai setelah rutin belajar.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SIMULASI -->
+<section class="card">
+
+<h2>🎮 Simulasi Problem Solving</h2>
+
+<div class="simulation">
+
+<p id="simText">
+Kamu mengalami masalah: <b>HP cepat kehabisan baterai.</b>
+</p>
+
+<div class="progress">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<button class="sim-btn" onclick="nextSimulation()">
+Mulai →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- QUIZ -->
+<section class="card">
+
+<h2>🎯 Mini Quiz</h2>
+
+<p style="color:#cbd5e1;margin-bottom:20px;">
+Jawab pertanyaan berikut untuk menguji pemahamanmu.
+</p>
+
+<div id="quiz"></div>
+
+<div id="quizResult"></div>
+
+</section>
+
+</div>
+
+
+<footer>
+© 2026 • Problem Solving Interaktif
+</footer>
+
+
+<script>
+
+/* =========================
+   TAB MATERI
+========================= */
+
+function showTab(type,button) {
+
+    const content = document.getElementById("tabContent");
+
+    document.querySelectorAll(".tab-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    if(type === "pengertian") {
+
+        content.innerHTML = `
+        <b>Problem solving</b> adalah proses mencari solusi
+        untuk menyelesaikan masalah dengan cara yang teratur,
+        logis, dan efektif.
+        `;
+
+    }
+
+    else if(type === "tujuan") {
+
+        content.innerHTML = `
+        Tujuan problem solving adalah menemukan penyebab masalah,
+        menentukan solusi yang tepat, mengurangi kesalahan,
+        dan menyelesaikan masalah dengan lebih efektif.
+        `;
+
+    }
+
+    else if(type === "manfaat") {
+
+        content.innerHTML = `
+        Problem solving membantu kita berpikir kritis,
+        mengambil keputusan, menghadapi masalah,
+        dan menemukan solusi yang lebih tepat.
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   BUKA TUTUP LANGKAH
+========================= */
+
+function toggleStep(element) {
+
+    element.classList.toggle("open");
+
+}
+
+
+/* =========================
+   SIMULASI
+========================= */
+
+let simulationStep = 0;
+
+const simulationData = [
+
+`<b>Masalah:</b> HP cepat kehabisan baterai.<br><br>
+Sekarang kita harus mencari tahu penyebabnya.`,
+
+`<b>Penyebab:</b> Banyak aplikasi berjalan di latar belakang
+dan kecerahan layar terlalu tinggi.<br><br>
+Sekarang kita perlu mencari solusi.`,
+
+`<b>Solusi:</b> Tutup aplikasi yang tidak digunakan,
+kurangi kecerahan layar, dan aktifkan penghemat baterai.`,
+
+`<b>Terapkan:</b> Jalankan solusi tersebut dan gunakan HP
+seperti biasa untuk melihat perubahan.`,
+
+`<b>Evaluasi:</b> Periksa apakah baterai sekarang lebih awet.
+Jika belum, cari penyebab lain dan coba solusi berbeda.`
+
+];
+
+function nextSimulation() {
+
+    if(simulationStep < simulationData.length) {
+
+        document.getElementById("simText").innerHTML =
+        simulationData[simulationStep];
+
+        simulationStep++;
+
+        let progress =
+        (simulationStep / simulationData.length) * 100;
+
+        document.getElementById("progressBar").style.width =
+        progress + "%";
+
+    }
+
+    if(simulationStep === simulationData.length) {
+
+        document.querySelector(".sim-btn").innerText =
+        "✅ Selesai";
+
+    }
+
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+const questions = [
+
+{
+    question:
+    "Apa yang dilakukan pertama kali dalam problem solving?",
+
+    options: [
+        "Langsung mencari jawaban",
+        "Mengidentifikasi masalah",
+        "Mengabaikan masalah",
+        "Menyalahkan orang lain"
+    ],
+
+    answer: 1
+},
+
+{
+    question:
+    "Setelah mengetahui masalah, langkah berikutnya adalah...",
+
+    options: [
+        "Mencari penyebab",
+        "Berhenti",
+        "Mengabaikan masalah",
+        "Mengulang masalah"
+    ],
+
+    answer: 0
+},
+
+{
+    question:
+    "Apa tujuan dari mencari beberapa solusi?",
+
+    options: [
+        "Membuat masalah lebih sulit",
+        "Memilih cara yang paling sesuai",
+        "Menghindari masalah",
+        "Menambah masalah"
+    ],
+
+    answer: 1
+},
+
+{
+    question:
+    "Mengapa solusi perlu dievaluasi?",
+
+    options: [
+        "Untuk mengetahui apakah solusi berhasil",
+        "Agar masalah bertambah",
+        "Agar tidak perlu mencoba",
+        "Untuk menghindari solusi"
+    ],
+
+    answer: 0
+},
+
+{
+    question:
+    "Problem solving dapat digunakan dalam...",
+
+    options: [
+        "Sekolah saja",
+        "Game saja",
+        "Kehidupan sehari-hari",
+        "Tidak dapat digunakan"
+    ],
+
+    answer: 2
+}
+
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function loadQuiz() {
+
+    const quiz = document.getElementById("quiz");
+
+    if(currentQuestion >= questions.length) {
+
+        showResult();
+        return;
+
+    }
+
+    const q = questions[currentQuestion];
+
+    quiz.innerHTML = `
+
+    <div class="question">
+
+        <h3>
+        ${currentQuestion + 1}. ${q.question}
+        </h3>
+
+        ${q.options.map((option,index) => `
+
+            <button
+            class="option"
+            onclick="answerQuiz(${index})">
+
+            ${String.fromCharCode(65 + index)}.
+            ${option}
+
+            </button>
+
+        `).join("")}
+
+    </div>
+
+    `;
+
+}
+
+function answerQuiz(selected) {
+
+    const correct =
+    questions[currentQuestion].answer;
+
+    const buttons =
+    document.querySelectorAll(".option");
+
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+
+    if(selected === correct) {
+
+        buttons[selected].classList.add("correct");
+
+        score++;
+
+    } else {
+
+        buttons[selected].classList.add("wrong");
+
+        buttons[correct].classList.add("correct");
+
+    }
+
+    setTimeout(() => {
+
+        currentQuestion++;
+
+        loadQuiz();
+
+    },1000);
+
+}
+
+function showResult() {
+
+    const percentage =
+    Math.round((score / questions.length) * 100);
+
+    let message;
+
+    if(percentage === 100) {
+
+        message = "🔥 Sempurna! Kamu sangat memahami problem solving.";
+
+    } else if(percentage >= 80) {
+
+        message = "👏 Bagus banget! Pemahamanmu sudah kuat.";
+
+    } else if(percentage >= 60) {
+
+        message = "👍 Lumayan! Tinggal sedikit lagi.";
+
+    } else {
+
+        message = "📚 Yuk pelajari materinya lagi!";
+
+    }
+
+    document.getElementById("quiz").innerHTML = "";
+
+    document.getElementById("quizResult").innerHTML = `
+
+    <div class="result">
+
+        <h2>🎉 Quiz Selesai!</h2>
+
+        <h1>${score}/${questions.length}</h1>
+
+        <p>${percentage}%</p>
+
+        <p>${message}</p>
+
+        <button
+        class="restart"
+        onclick="restartQuiz()">
+
+        🔄 Ulangi Quiz
+
+        </button>
+
+    </div>
+
+    `;
+
+}
+
+function restartQuiz() {
+
+    currentQuestion = 0;
+    score = 0;
+
+    document.getElementById("quizResult").innerHTML = "";
+
+    loadQuiz();
+
+}
+
+
+/* MULAI QUIZ */
+
+loadQuiz();
+
+</script>
+
+</body>
+</html>
